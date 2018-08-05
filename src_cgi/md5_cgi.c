@@ -17,6 +17,7 @@ int main()
     char *token=malloc(513);
     
     char *file_md5=malloc(512);
+    char *filename=malloc(512);
 
     int ret;
     int uid=-1;
@@ -85,6 +86,7 @@ int main()
             MEMSET_ARRAY_ZERO(query);
             MEMSET_ARRAY_ZERO(token);
             MEMSET_ARRAY_ZERO(file_md5);
+            MEMSET_ARRAY_ZERO(filename);
 
 
             do{
@@ -119,7 +121,7 @@ int main()
                 
                 char * md5=cJSON_Print(md5_json);
 
-                char *filename=NULL;
+               
 
                 //查询文件是否存在于服务器
                 ret = check_file_exists(md5);
@@ -129,11 +131,9 @@ int main()
                       //去掉双引号
                       strncpy(file_md5,md5+1,strlen(md5)-2);
 
+                   
+                      //去掉双引号
                       strncpy(filename,filename_tmp+1,strlen(filename_tmp)-2);
-
-
-
-                      // LOG(LOG_MODULE, LOG_PROC,"单独的字:%c\n",*md5);
 
                       LOG(LOG_MODULE, LOG_PROC,"file_md5:%s md5:%s\n",file_md5,md5);
                       //这里需要把这个文件也加入到当前上传的这个用户里面 

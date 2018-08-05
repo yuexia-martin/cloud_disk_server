@@ -150,3 +150,25 @@ path:/tmp/ui_mainwindow.h
 [2018-08-05 22:13:54]--[./common/redis_op.c:412]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
 [2018-08-05 22:13:54]--[./common/redis_op.c:412]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
 [2018-08-05 22:13:55]--[./common/redis_op.c:412]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2018-08-05 22:18:04]--[./common/redis_op.c:412]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2018-08-05 22:18:04]--[./common/redis_op.c:412]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2018-08-05 22:18:04]--[./common/redis_op.c:412]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2018-08-05 22:18:04]--[./common/redis_op.c:412]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2018-08-05 22:19:08]--[./common/redis_op.c:412]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2018-08-05 22:19:08]--[./common/redis_op.c:412]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2018-08-05 22:19:08]--[./common/redis_op.c:412]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2018-08-05 22:19:08]--[./common/redis_op.c:412]--[+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+[2018-08-05 22:20:48]--[./src_cgi/upload_cgi.c:86]--接收到新连接
+[2018-08-05 22:20:49]--[./src_cgi/upload_cgi.c:156]--get filename:ui_main_disk.h
+[2018-08-05 22:20:49]--[./src_cgi/upload_cgi.c:235]--okok
+[2018-08-05 22:20:49]--[./src_cgi/upload_cgi.c:242]--001:3
+[2018-08-05 22:20:49]--[./src_cgi/upload_cgi.c:247]--file MD5:3ec9879c0b5bef63e3afffd69a931f25
+path:/tmp/ui_main_disk.h
+[2018-08-05 22:20:49]--[./src_cgi/upload_cgi.c:255]--文件后缀名:h
+[2018-08-05 22:21:40]--[./src_cgi/upload_cgi.c:86]--接收到新连接
+[2018-08-05 22:21:41]--[./src_cgi/upload_cgi.c:156]--get filename:Makefile.Debug
+[2018-08-05 22:21:41]--[./src_cgi/upload_cgi.c:235]--okok
+[2018-08-05 22:21:41]--[./src_cgi/upload_cgi.c:242]--001:4
+[2018-08-05 22:21:41]--[./src_cgi/upload_cgi.c:247]--file MD5:4729be54c06aad92e19c502ef5e200af
+path:/tmp/Makefile.Debug
+[2018-08-05 22:21:41]--[./src_cgi/upload_cgi.c:255]--文件后缀名:Debug
