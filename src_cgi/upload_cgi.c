@@ -31,7 +31,7 @@ int main ()
     char file_id[1024]={0};
 
     //文件md5
-    char file_md5[33]={0};
+    char *file_md5=malloc(512);
     //文件后缀名
     char file_suffix[513]={0};
 
@@ -51,7 +51,7 @@ int main ()
 
     }
 
-    redis_conn=init();
+    init();
 
 
    
@@ -67,7 +67,7 @@ int main ()
 
     do{
          
-                  //鉴权
+            //鉴权
            uid = check_user();
 
            if(-1 == uid)
@@ -132,7 +132,7 @@ int main ()
           
                 for (i = 0; i < len; i++) {
                         if ((ch = getchar()) < 0) {
-                            printf("Error: Not enough bytes received on standard input<p>\n");
+                            LOG(REDIS_LOG_MODULE, REDIS_LOG_PROC, "upload 读取字节流失败\n");
                             break;
                          }
 
@@ -232,9 +232,16 @@ int main ()
                         wait(&status);
                     }
 
+                    LOG(REDIS_LOG_MODULE, REDIS_LOG_PROC, "okok\n");
 
                     //获取文件md5
-                    Compute_file_md5((char *)&path, (char *)&file_md5);
+                    Compute_file_md5((char *)&path,file_md5);
+
+                    // file_md5[0]='x';
+                    // file_md5[1]='y';
+                     LOG(REDIS_LOG_MODULE, REDIS_LOG_PROC, "001:%c\n",*file_md5);
+                    
+
 
 
                     LOG(REDIS_LOG_MODULE, REDIS_LOG_PROC, "file MD5:%s\npath:%s\n",file_md5,path);

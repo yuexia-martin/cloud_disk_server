@@ -9,7 +9,7 @@ int main()
     char *md5_token=malloc(33);
     int ret;
 
-    redis_conn= init();
+    init();
 
     //阻塞等待用户连接
     while (FCGI_Accept() >= 0)
@@ -18,39 +18,6 @@ int main()
         long len;
 
         printf("Content-type: text/html\r\n\r\n");
-
-
-
-
-        //并把token写入redis(以后客户端访问必须带token才能访问)
-                  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         if( contentLength == NULL )
@@ -147,23 +114,7 @@ int main()
 
 
                     //并把token写入redis(以后客户端访问必须带token才能访问)
-                    // ret = rop_set_string(redis_conn,token,query_result);
-
-
-
-                       redisReply *reply = NULL;
-
-                        // char key[]={"set token_42c5c5745627c75bdc95156481ffe67a 1"};
-
-                        reply = redisCommand(redis_conn, "set %s %s",token,query_result);
-
-                        if(NULL == reply){
-                            LOG(REDIS_LOG_MODULE, REDIS_LOG_PROC, "rop_set_string error:%s %s\n",token,query_result);
-                           
-                        }
-
-
-
+                     ret = rop_set_string(redis_conn,token,query_result);
 
                     
 
@@ -171,6 +122,8 @@ int main()
                         LOG(LOG_MODULE, LOG_PROC, "设置redis登录token失败\n");
                         break;
                     }
+
+
 
                     // 设置过期时间(一天过期)
                     ret = rop_set_key_expire(redis_conn, token, 43200);

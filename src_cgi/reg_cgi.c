@@ -1,6 +1,6 @@
 #include "init.h"
 
-redisContext * redis_conn;
+
 
 int main()
 {
@@ -9,7 +9,7 @@ int main()
     char *query=malloc(1024);
     int ret;
 
-    redis_conn=init();
+   init();
 
     //阻塞等待用户连接
     while (FCGI_Accept() >= 0)

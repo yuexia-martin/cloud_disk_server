@@ -16,7 +16,7 @@ int main()
     char *query=malloc(1024);
     char *token=malloc(513);
     
-    char file_md5[33]={0};
+    char *file_md5=malloc(512);
 
     int ret;
     int uid=-1;
@@ -25,7 +25,7 @@ int main()
 
 
 
-    redis_conn=init();
+    init();
 
     //阻塞等待用户连接
     while (FCGI_Accept() >= 0)
@@ -115,19 +115,27 @@ int main()
                 }
 
                 //把值转换成char
-                char * filename=cJSON_Print(filename_json);
+                char * filename_tmp=cJSON_Print(filename_json);
                 
                 char * md5=cJSON_Print(md5_json);
+
+                char *filename=NULL;
 
                 //查询文件是否存在于服务器
                 ret = check_file_exists(md5);
 
                 if(ret > 0){
 
-                    
-                      strcpy((char *)&file_md5,md5);
+                      //去掉双引号
+                      strncpy(file_md5,md5+1,strlen(md5)-2);
 
-                      LOG(LOG_MODULE, LOG_PROC,"file_md5!!:%s\n",file_md5);
+                      strncpy(filename,filename_tmp+1,strlen(filename_tmp)-2);
+
+
+
+                      // LOG(LOG_MODULE, LOG_PROC,"单独的字:%c\n",*md5);
+
+                      LOG(LOG_MODULE, LOG_PROC,"file_md5:%s md5:%s\n",file_md5,md5);
                       //这里需要把这个文件也加入到当前上传的这个用户里面 
                       ret = insert_user_file_list_table(uid,file_md5,filename);
 

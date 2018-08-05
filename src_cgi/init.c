@@ -11,13 +11,10 @@ redisContext *redis_conn;
 const char *config_path="./conf/cfg.json";
 
 //初始化
-redisContext * init(){
+void  init(){
 
     mysql_initialise();
-    //redisContext * redis_initialise();
-
-    return redis_initialise();
-
+    redis_initialise();
 }
 
 
@@ -38,7 +35,7 @@ int mysql_initialise(){
 }
 
 //redis 初始化
-redisContext * redis_initialise(){
+int redis_initialise(){
 
     char *ip_str = malloc(128);
     char *port_str = malloc(128);
@@ -54,27 +51,8 @@ redisContext * redis_initialise(){
     {
         LOG(LOG_MODULE,LOG_PROC, "连接redis缓存服务器失败\n");
         return -1;
-    }else{
-
-
-
-
-                          redisReply *reply = NULL;
-
-                        char key[]={"set token_42c5c5745627c75bdc95156481ffe67a 1"};
-
-                        reply = redisCommand(redis_conn, key);
-
-                        if(NULL == reply){
-                            LOG(REDIS_LOG_MODULE, REDIS_LOG_PROC, "rop_set_string error:%s \n", key);
-                           
-                        }
-
-
-
-
     }
-    return redis_conn；
+
     return 1;
 
 }

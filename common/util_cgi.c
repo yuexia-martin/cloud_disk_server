@@ -375,59 +375,53 @@ int check_user(){
      return atoi(result);
 }
 
-
 int Compute_file_md5(char *file_path, char *md5_str)
 {
-    LOG(LOG_MODULE, LOG_PROC, "进入Compute_file_md5函数\n");
-    int i;
-    int fd;
-    int ret;
-    unsigned char data[READ_DATA_SIZE];
-    unsigned char md5_value[MD5_SIZE];
-    MD5_CTX md5;
- 
-    fd = open(file_path, O_RDONLY);
-    if (-1 == fd)
-    {
-        perror("open");
-        return -1;
-    }
- 
-    // init md5
-    MD5Init(&md5);
+  int i;
+  int fd;
+  int ret;
+  unsigned char data[READ_DATA_SIZE];
+  unsigned char md5_value[MD5_SIZE];
+  MD5_CTX md5;
 
-LOG(LOG_MODULE, LOG_PROC, " 001 info md5:%s\n",md5);
- 
-    while (1)
-    {
-        ret = read(fd, data, READ_DATA_SIZE);
-        if (-1 == ret)
-        {
-            perror("read");
-            return -1;
-        }
- 
-        MD5Update(&md5, data, ret);
- 
-        if (0 == ret || ret < READ_DATA_SIZE)
-        {
-            break;
-        }
-    }
- 
-    close(fd);
- LOG(LOG_MODULE, LOG_PROC, "002  info md5:%s\n",md5);
-    MD5Final(&md5, md5_value);
- LOG(LOG_MODULE, LOG_PROC, "003 info md5:%s\n",md5);
-    for(i = 0; i < MD5_SIZE; i++)
-    {
-        snprintf(md5_str + i*2, 2+1, "%02x", md5_value[i]);
-    }
-     LOG(LOG_MODULE, LOG_PROC, " info md5:%s\n",md5);
+  fd = open(file_path, O_RDONLY);
+  if (-1 == fd)
+  {
+    perror("open");
+    return -1;
+  }
 
-    md5_str[MD5_STR_LEN] = '\0'; // add end
- 
-    return 0;
+  // init md5
+  MD5Init(&md5);
+
+  while (1)
+  {
+    ret = read(fd, data, READ_DATA_SIZE);
+    if (-1 == ret)
+    {
+      perror("read");
+      return -1;
+    }
+
+    MD5Update(&md5, data, ret);
+
+    if (0 == ret || ret < READ_DATA_SIZE)
+    {
+      break;
+    }
+  }
+
+  close(fd);
+
+  MD5Final(&md5, md5_value);
+
+  for(i = 0; i < MD5_SIZE; i++)
+  {
+    snprintf(md5_str + i*2, 2+1, "%02x", md5_value[i]);
+  }
+  md5_str[MD5_STR_LEN] = '\0'; // add end
+
+  return 0;
 }
 
 

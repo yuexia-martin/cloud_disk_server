@@ -53,7 +53,7 @@
 #define MEMSET_ARRAY_ZERO(arg)    do{memset(arg,0,sizeof(arg));}while(0);
 
 
-extern int init();
+extern void init();
 
 extern int mysql_initialise();
 
@@ -64,7 +64,7 @@ extern int redis_initialise();
 extern MYSQL * mysql_conn;
 
 //全局变量 redis 连接
-// redisContext *redis_conn;
+redisContext *redis_conn;
 
 extern const char *config_path;
 
