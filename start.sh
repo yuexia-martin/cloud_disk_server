@@ -1,11 +1,12 @@
 clear
 rm -rf ./bin_cgi/*
 make
-killall reg login upload md5
+killall reg login upload md5 myfiles
 spawn-fcgi ./bin_cgi/login -p 30000
 spawn-fcgi ./bin_cgi/reg -p 30001
 spawn-fcgi ./bin_cgi/upload -p 30002
 spawn-fcgi ./bin_cgi/md5 -p 30003
+spawn-fcgi ./bin_cgi/myfiles -p 30004
 
 # sudo cp ./nginx.conf /usr/local/nginx/conf/
 # sudo nginx -s stop
@@ -21,3 +22,4 @@ spawn-fcgi ./bin_cgi/md5 -p 30003
 # fdfs_storaged /etc/fdfs/storage.conf.sample
 
 ps -aux|grep bin_cgi
+

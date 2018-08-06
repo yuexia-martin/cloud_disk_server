@@ -320,7 +320,7 @@ void return_json(int code,char * key,char *value)
 int genRandomString(int length,char* ouput)
 {
     int flag, i;
-    srand((unsigned)time(NULL));
+    srand((unsigned)time(NULL)+rand());
     for (i = 0; i < length - 1; i++)
     {
         flag = rand() % 3;

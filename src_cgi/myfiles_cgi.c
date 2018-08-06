@@ -1,28 +1,27 @@
-#include "fcgi_config.h"
-#include "fcgi_stdio.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "make_log.h" //日志头文件
-#include "util_cgi.h"
-#include "deal_mysql.h"
-#include "cfg.h"
-#include "cJSON.h"
-#include <sys/time.h>
+#include "init.h"
 
-#define LOG_MODULE       "cgi"
-#define LOG_PROC         "myfiles"
-#define MEMSET_ARRAY_ZERO(arg)    do{memset(arg,0,sizeof(arg));}while(0);
 
+extern void get_file_list(int uid);
+
+//获取文件列表
 int main()
 {
+     int uid=-1;
+
+    init();
+
     //阻塞等待用户连接
     while (FCGI_Accept() >= 0)
     {
         char *contentLength = getenv("CONTENT_LENGTH");
         long len;
+       
 
         printf("Content-type: text/html\r\n\r\n");
+
+
+         //鉴权
+        uid = check_user();
 
         if( contentLength == NULL )
         {
@@ -53,6 +52,12 @@ int main()
 			}
 			//处理数据
 
+           //循环获取这个用户的文件列表
+            get_file_list(uid);
+
+
+            //返回json
+
 
 
 
@@ -64,3 +69,43 @@ int main()
     return 0;
 }
 
+
+void get_file_list(int uid){
+
+    char query[1024]={0};
+    char query_result[1024]={0};
+
+    //组装sql 查询文件md5是否存在
+    sprintf(query,"\
+        SELECT\
+            id,\
+            uid,\
+            user_file_list.file_id,\
+            filename,\
+            user_file_list.createtime,\
+            shared_status,\
+            pv,\
+            md5,\
+            size,\
+            type,\
+            count\
+        FROM\
+            user_file_list\
+        LEFT JOIN file_info ON file_info.file_id = user_file_list.file_id\
+        WHERE\
+            uid = %d\
+        ",uid);
+
+
+    // 查询
+    mysql_query(mysql_conn, query);
+
+    //生成结果集
+    MYSQL_RES *res_set = mysql_store_result(mysql_conn); 
+
+ 
+    //处理结果集
+    process_result_test(mysql_conn,res_set);
+
+
+}

@@ -27,7 +27,7 @@ SRC=./src_cgi/init.c\
 LIBS=-lfcgi -lfdfsclient -lfastcommon -lhiredis -lm -lmysqlclient
 
 
-all:reg login upload md5
+all:reg login upload md5 myfiles
 
 
 reg:
@@ -41,4 +41,7 @@ upload:
 	
 md5:
 	gcc -I./include ${TOOLS}  ${CPPLFAGS} ${SRC} ./src_cgi/md5_cgi.c -o ./bin_cgi/md5 ${LIBS}
+
+myfiles:
+	gcc -I./include ${TOOLS}  ${CPPLFAGS} ${SRC} ./src_cgi/myfiles_cgi.c -o ./bin_cgi/myfiles ${LIBS}
 
