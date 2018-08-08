@@ -17,7 +17,7 @@ int main()
         char *contentLength = getenv("CONTENT_LENGTH");
         long len;
 
-        printf("Content-type: text/html\r\n\r\n");
+         printf("Content-type: text/html;charset=utf-8\r\n\r\n");
 
         if( contentLength == NULL )
         {

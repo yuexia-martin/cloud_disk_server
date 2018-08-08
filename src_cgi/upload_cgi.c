@@ -61,7 +61,7 @@ int main ()
         int len;
         char tmp[10240]={0};
 
-        printf("Content-type: text/html\r\n\r\n");
+        printf("Content-type: text/html;charset=utf-8\r\n\r\n");
     
 
 
